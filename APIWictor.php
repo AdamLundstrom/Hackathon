@@ -1,19 +1,18 @@
 <?php
 // Point to where you downloaded the phar
-include('./httpful.phar');
+include('httpful.phar');
 include('db_connection.php');
 
 $uri =  "https://api-v3.igdb.com/games";
 $key = '25adf5f6b515bd32214172f04eaeeb67';
 
 
-$db = new db_connection;
+#$db = new db_connection;
 
 #$db -> dropDatabase();
 
 $array = ReadMostPopular($uri, $key, $db);
 
-#var_dump($array);
 
 function ReadMostPopular($uri, $key, $db){
 	$response = \Httpful\Request::post($uri) 
@@ -31,9 +30,9 @@ function ReadMostPopular($uri, $key, $db){
 		} else{
 			$db->addForumThread($name["id"], $name["name"]);
 		}*/
-		echo $name["id"];
-		echo $name["name"];
-		echo "<br/>";
+		#echo $name["id"];
+		#echo $name["name"];
+		#echo "<br/>";
 	}
 
 	return $nameArray;

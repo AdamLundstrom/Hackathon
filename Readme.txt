@@ -4,6 +4,7 @@ git config --global user.mail <din epost>
 Sedan:
 git remote add origin https://github.com/AdamLundstrom/Hackathon.git
 git pull
+git checkout dev
 
 Nu bör alla filer finnas i ditt repo
 Du bör köra

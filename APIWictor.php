@@ -2,15 +2,15 @@
 // Point to where you downloaded the phar
 include('./httpful.phar');
 
-$uri =  "https://api-v3.igdb.com";
-$username = 'WictorSvensson';
-$password = 'Wictor123';
+$uri =  "https://api-v3.igdb.com/games";
 
-$response = \Httpful\Request::post($uri+"/games"); // Build a POST request...
-->sendsJson();                               // tell it we're sending (Content-Type) JSON...
-->authenticateWith($username, $password);  // authenticate with basic auth.
-->send();
+$key = '25adf5f6b515bd32214172f04eaeeb67';
 
-echo "Games: $response->title"
+$response = \Httpful\Request::post($uri) 
+	->addHeader('user-key', $key)
+	->body('limit 1; fields name ; search "tetris";')
+	->send();
+
+echo $response;
 
 ?>

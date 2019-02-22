@@ -1,6 +1,10 @@
 <?php
 
 include('httpful.phar');
+include ('db_connection.php');
+$connect = new db_connection();
+$connect->dropDatabase();
+$connect = new db_connection();
 //ranking
 //$uri =  "https://api.appmonsta.com/v1/stores/android/rankings/aggregate	.json?country=US&date=2019-02-21";
 $uri =  "https://api.appmonsta.com/v1/stores/android/rankings.json?country=US&date=2019-02-21";
@@ -25,14 +29,12 @@ $i2 = 3;
 //echo json_decode($response,true);
 
 
-for($i = 0; $i < 9; $i++){
+for($i = 0; $i < 19; $i++){
 	
 		
 	$arrayOfId[$i] = json_decode($arrayOfId[$i],true);
-	echo $arrayOfId[$i]["app_name"]."<br>";
-	
-	
-	
+	$connect->addApp($arrayOfId[$i]["app_id"],$arrayOfId[$i]["app_name"]); 	
+	//echo $arrayOfId[$i]["app_id"]."<br>";
 }
 
 	

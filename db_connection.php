@@ -56,7 +56,7 @@ class db_connection{
 		
 		$sql = "CREATE TABLE IF NOT EXISTS ForumPost(
 			forumPostID int AUTO_INCREMENT PRIMARY KEY,
-			gameID int NOT NULL,
+			gameID double NOT NULL,
 			FOREIGN KEY (gameID) REFERENCES ForumThread(gameID),
 			userID int NOT NULL,
 			FOREIGN KEY (userID) REFERENCES User(userID),
@@ -70,8 +70,8 @@ class db_connection{
 		}
 
 		$sql = "CREATE TABLE IF NOT EXISTS App(
-			appID int PRIMARY KEY,
-			appName int NOT NULL,
+			appID varchar(250) PRIMARY KEY,
+			appName varchar(250) NOT NULL,
 			UNIQUE (appID),
 			UNIQUE (appName)
 			)";

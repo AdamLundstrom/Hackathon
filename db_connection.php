@@ -143,7 +143,7 @@ class db_connection{
 	function getAllForumThread(){
 		$sql="SELECT * FROM ForumThread";
 		$result=$this->connection->query($sql);
-		$threadList = array();
+		$threadList = null;
 		if($result->num_rows > 0){	
 			while($row=$result->fetch_assoc()){	
 				$threadList[] = new Thread($row["gameID"], $row['threadName']);

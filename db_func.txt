@@ -2,19 +2,44 @@ $db is of the class db_connection.
 Example:
 $db = new db_connection;
 
+
 Add user
 Syntax:
-addUser($newUserName, $newUserPW)
+addUser($newUserName, $newUserPW, $email)
 Example:
-$db->addUser("TTTTT", "AAAAA"); 
+$db->addUser("Code", "CCCCC", "email@email");
+
+Get a user
+Syntax:
+getUser($username)
+Example:
+$user = $db->getUser("Bob");
+echo $user->getUserName();
+
+add forum thread
+Syntax:
+addForumThread($gameID, $threadName)
+Example:
+$db->addForumThread(44, "DOOOOOM");
+
+get all threads
+Syntax:
+getAllForumThread()
+Example:
+
 
 
 Add forum post
 Syntax:
-addForumPost($userID, $title, $postText)
+addForumPost($gameID, $userID, $title, $postText)
 Example:
-$db->addForumPost(1, "Title", "Text");
+db->addForumPost(44, 1, "Title1", "Textttttttttttttttt");
 
+Get all posts
+Syntax:
+getAllForumPost()
+Example:
+$posts = $db->getAllForumPost();
 
 
 Drop database

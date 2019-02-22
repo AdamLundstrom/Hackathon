@@ -1,0 +1,22 @@
+$db is of the class db_connection.
+Example:
+$db = new db_connection;
+
+Add user
+Syntax:
+addUser($newUserName, $newUserPW)
+Example:
+$db->addUser("TTTTT", "AAAAA"); 
+
+
+Add forum post
+Syntax:
+addForumPost($userID, $title, $postText)
+Example:
+$db->addForumPost(1, "Title", "Text");
+
+
+
+Drop database
+Syntax and Example:
+$db->dropDatabase();

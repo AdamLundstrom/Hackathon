@@ -19,9 +19,8 @@ class db_connection{
 		$this->username = "root";
 		$this->password = ""; 
 		$this->db="hackathon";
+
 		//försöker ansluta till databasen
-	//$this->connection = new mysqli($this->servername, $this->username, $this->password);
-	//	$sql = "CREATE DATABASE hackathon";
 		$this->connection = new mysqli($this->servername, $this->username, $this->password, $this->db);
 		//Om det inte går att ansluta till databasen
 		if($this->connection->connect_error){ 
@@ -41,136 +40,75 @@ class db_connection{
 			//öppna flödet till  den nya databasen
 			$this->connection = new mysqli($this->servername, $this->username, $this->password, $this->db) or die("not woking");
 		}
+
 		//om tabellen inte existerar skapas en ny
-		
-		$sql= "CREATE TABLE IF NOT EXISTS Person(
-		personID varchar(12) PRIMARY KEY,
-		password varchar(20) NOT NULL,
-		firstName varchar(50) NOT NULL,
-		lastName varchar(50) NOT NULL,
-		phone varchar(11),
-		latitude float(20) NOT NULL,
-		longitud float(20) NOT NULL,
-		interest varchar(50) NOT NULL
+		$sql= "CREATE TABLE IF NOT EXISTS User(
+		userID int AUTO_INCREMENT PRIMARY KEY,
+		userName varchar(30) NOT NULL,
+		userPassword varchar(30) NOT NULL
 		)";	
 		if ($this->connection->query($sql) === FALSE) { 
 			echo "Error creating table: 1	" , $this->connection->error, "<br>";
 		} 
-		$sql= "CREATE TABLE IF NOT EXISTS Event(
-		eventID int(3) AUTO_INCREMENT PRIMARY KEY,
+
+		//om tabellen inte existerar skapas en ny
+		$sql= "CREATE TABLE IF NOT EXISTS ForumPost(
+		forumPostID int AUTO_INCREMENT PRIMARY KEY,
+		userID int NOT NULL,
+		FOREIGN KEY (userID) REFERENCES User(userID),
+		posted DATETIME NOT NULL,
 		title varchar(50) NOT NULL,
-		description varchar(50) NOT NULL,
-		latitude float(20) NOT NULL,		
-		longitud float(20) NOT NULL,
-		date varchar(20) NOT NULL,
-		time varchar(20) NOT NULL
+		postText varchar(250) NOT NULL
 		)";
 		
 		if ($this->connection->query($sql) === FALSE) { 
 			echo "Error creating table: 2	" , $this->connection->error, "<br>";
-		} 
-		$sql= "CREATE TABLE IF NOT EXISTS participate(
-		eventID int(3),
-		personID varchar(12),
-		FOREIGN KEY (personID) REFERENCES Person(personID),
-		FOREIGN KEY (eventID) REFERENCES Event(eventID),
-		PRIMARY KEY (personID,eventID)
-		)";
+			$this->dropDatabase();
+		}
 		
-		if ($this->connection->query($sql) === FALSE) { 
-			echo "Error creating table: 3	" , $this->connection->error, "<br>";
-		}
-		//hämtar all data från tabellen användare och lägger dem i en array
-		$sql="SELECT * FROM Person";
-		$result=$this->connection->query($sql);
-		if($result->num_rows > 0){		
-			while($row=$result->fetch_assoc()){
-			$this->personList[]=new Person($row["personID"],$row['password'],$row["firstName"],$row["lastName"],$row["phone"],$row["latitude"],
-				$row["longitud"], $row["interest"]);
-			}		
-		}
-		//hämtar all data från tabellen bokningar och lägger dem i en array	
-		$sql="SELECT * FROM Event";
-		$result=$this->connection->query($sql);
-		if($result->num_rows > 0){
-			while($row=$result->fetch_assoc()){
-					$this->eventList[]=new Event($row["eventID"],$row["title"],$row["description"],
-					$row["latitude"],$row["longitud"],$row["date"],$row["time"]);
-				
-			}		
-		}	
-	}		
-	function addEvent($pNo,$t,$d,$lat,$lng,$date,$time){
-		$sql = "INSERT INTO Event (title,description,latitude,longitud,date,time)
-		VALUES ('$t','$d','$lat','$lng','$date',$time)";
-		if ($this->connection->query($sql) === False) {
-			echo "Error: " . $sql . "<br>" . $this->connection->error;
-		}
-		$ID=0;
-		$sql = "SELECT eventID FROM Event ORDER BY eventID DESC LIMIT 1";
-		$result=$this->connection->query($sql);
-		if($result->num_rows > 0){
-			$row = $result->fetch_assoc();
-			$ID = $row['eventID'];
-		}
-		$this->eventList[]=new Event($ID,$t,$d,$lng,$lat,$date,$time);
-		$sql = "INSERT INTO participate (eventID, personID)
-		VALUES ('$ID','$pNo')";
-		if ($this->connection->query($sql) === False) {
-			echo "Error: " . $sql . "<br>" . $this->connection->error;
-		}		
-		$this->connection->close();			
-	}		
-	function addPerson($pN,$password,$f,$l,$p,$lat,$lng,$i){
-		$this->personList[]=new Person($pN,$password,$f,$l,$p,$lat,$lng,$i);
-		$sql = "INSERT INTO Person (personID,password,firstName,lastName,phone,latitude,longitud,interest)
-		VALUES ('$pN','$password','$f','$l','$p','$lat','$lng','$i')";
-		if ($this->connection->query($sql) === False) {
-			echo "Error: " . $sql . "<br>" . $this->connection->error;
-		}
-		$this->connection->close();
-	}
-	function addPersonToEvent($e,$p){
-		$sql = "INSERT INTO participate (eventID, personalID) VALUES ('$e','$p')";
-		if ($this->connection->query($sql) === false) {
-			echo "Error: " . $sql . "<br>" . $this->connection->error;
-		}
-		$this->connection->close();
 	}	
-	function getPersonsFromEvent($e){
-		$ID = (int)$e;
-		$persons = array();
-		$sql="SELECT personID FROM participate WHERE eventID = $ID";
-		$result=$this->connection->query($sql);
-		if($result->num_rows > 0){
-			while($row=$result->fetch_assoc()){
-				$persons = $row['personID'];
-			}
-		}	
-		return $persons;
+	
+	function dropDatabase(){
+		$sql = "DROP DATABASE hackathon";
+		if ($this->connection->query($sql) === False) {
+			echo "Error: " . $sql . "<br>" . $this->connection->error;
+		}
 	}
-	function getPerson($id){
-		return $this->personList[$id];
+
+	function addApp(){
+		$sql = "";
+		if ($this->connection->query($sql) === False) {
+			echo "Error: " . $sql . "<br>" . $this->connection->error;
+		}
 	}
-	function getPersonPNo($pNo){
-		
-		for($i=0;$i<count($this->personList);$i++){
-			if($this->personList[$i]->getPersonID() == $pNo){
-				return $this->personList[$i];
-			}
-		}	
-	}		
-	function getEvent($id){
-		return $this->eventList[$id];
-	}		
-	function getLengthOfPersonList(){
-		$i =count($this->personList);
-		return $i;
+
+	function addUser($newUserName, $newUserPW){
+		$sql = "INSERT INTO User (userName, userPassword)
+		Values ('$newUserName', '$newUserPW')";
+
+		if ($this->connection->query($sql) === False) {
+			echo "Error: " . $sql . "<br>" . $this->connection->error;
+		}
 	}
-	function getLengthOfEventList(){
-		$i =count($this->eventList);
-		return $i;
+
+	function addForumPost($userID, $title, $postText){
+		$posted = date("Y-m-d H:i:s");
+		$sql = "INSERT INTO ForumPost (userID, posted, title, postText)
+		Values ('$userID', '$posted', '$title', '$postText')";
+
+		if ($this->connection->query($sql) === False) {
+			echo "Error: " . $sql . "<br>" . $this->connection->error;
+		}
 	}	
 }
+
+$db = new db_connection;
+
+$db->addUser("Alice", "AAAAA");
+$db->addUser("Bob", "BBBBB");
+$db->addForumPost(1, "Title", "Text");
+
+#$db->dropDatabase();
+
 
 ?>

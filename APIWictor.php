@@ -6,12 +6,12 @@ $uri =  "https://api-v3.igdb.com/games";
 $key = '25adf5f6b515bd32214172f04eaeeb67';
 
 
-#echo ReadMostPopular($uri, $key);
+echo ReadMostPopular($uri, $key);
 
 function ReadMostPopular($uri, $key){
 	$response = \Httpful\Request::post($uri) 
 	->addHeader('user-key', $key)
-	->body('limit 50; fields names; popularity ; sort popularity desc;')
+	->body('limit 50; fields name; popularity; sort popularity desc;')
 	->send();
 
 	return $response;
@@ -32,7 +32,7 @@ function SearchGame($uri, $key, $searchWord){
 
 $genre = 4;
 
-echo CategorizeGames($uri, $key, $genre);
+#echo CategorizeGames($uri, $key, $genre);
 
 function CategorizeGames($uri, $key, $genre){
 	$response = \Httpful\Request::post($uri) 

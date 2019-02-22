@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+include ('../db_connection.php');
+$connect = new db_connection();
+
+
+?>
 <html>
 
 <head>
@@ -39,7 +45,17 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12"></div>
+                <div class="col-md-12">
+					<?php
+						$threds[] = $connect->getAllForumThread();
+						echo (var_dump($threds[0][1]));
+						for($i = 0; $i < count($threds); $i++){
+								
+								echo $threds[$i]->getThreadName();
+						}
+					?>
+				
+				</div>
             </div>
         </div>
     </div>

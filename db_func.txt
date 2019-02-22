@@ -41,6 +41,11 @@ getAllForumPost()
 Example:
 $posts = $db->getAllForumPost();
 
+Adams app grejer
+Syntax:
+addApp($appID, $appName)
+Example:
+
 
 Drop database
 Syntax and Example:

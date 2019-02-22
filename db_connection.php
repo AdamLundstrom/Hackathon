@@ -68,6 +68,17 @@ class db_connection{
 		if ($this->connection->query($sql) === FALSE) { 
 			echo "Error creating table: 3	" , $this->connection->error, "<br>";
 		}
+
+		$sql = "CREATE TABLE IF NOT EXISTS App(
+			appID int PRIMARY KEY,
+			appName int NOT NULL,
+			UNIQUE (appID),
+			UNIQUE (appName)
+			)";
+		
+		if ($this->connection->query($sql) === FALSE) { 
+			echo "Error creating table: 4	" , $this->connection->error, "<br>";
+		}
 		
 	}	
 	
@@ -139,6 +150,27 @@ class db_connection{
 			}	
 		}
 		return $threadList;
+	}
+
+	function addApp($appID, $appName){
+		$sql = "INSERT INTO App (appID, appName)
+		Values ('$appID', '$appName')";
+
+		if ($this->connection->query($sql) === False) {
+			echo "Error: " . $sql . "<br>" . $this->connection->error;
+		}
+	}
+
+	function getAllApps(){
+		$sql="SELECT * FROM App";
+		$result=$this->connection->query($sql);
+		$appList = array();
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$appList[] = new App($row["appID"], $row['appName']);
+			}	
+		}
+		return $appList;
 	}
 
 }

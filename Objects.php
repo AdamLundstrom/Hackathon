@@ -83,4 +83,20 @@ class Thread{
 	}
 }
 
+class App{
+	Private $appID;
+	Private $appName;
+	function __construct($appID, $appName){
+		$this->appID = $appID;
+		$this->appName = $appName;
+	}
+
+	function getAppID(){
+		return $this->appID;
+	}
+	function getAppName(){
+		return $this->appName;
+	}
+}
+
 ?>

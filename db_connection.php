@@ -70,7 +70,8 @@ class db_connection{
 		}
 
 		$sql = "CREATE TABLE IF NOT EXISTS App(
-			appID varchar(250) PRIMARY KEY,
+			id int AUTO_INCREMENT PRIMARY KEY,
+			appID varchar(250),
 			appName varchar(250) NOT NULL,
 			UNIQUE (appID),
 			UNIQUE (appName)
@@ -167,7 +168,19 @@ class db_connection{
 		$appList = array();
 		if($result->num_rows > 0){	
 			while($row=$result->fetch_assoc()){	
-				$appList[] = new App($row["appID"], $row['appName']);
+				$appList[] = new App($row["appID"], $row['appName'], $row["id"]);
+			}	
+		}
+		return $appList;
+	}
+
+	function getAllAppNames(){
+		$sql="SELECT appName FROM App LIMIT 0, 10";
+		$result=$this->connection->query($sql);
+		$appList = array();
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$appList[] = $row['appName'];
 			}	
 		}
 		return $appList;

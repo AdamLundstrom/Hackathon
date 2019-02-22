@@ -86,9 +86,15 @@ class Thread{
 class App{
 	Private $appID;
 	Private $appName;
-	function __construct($appID, $appName){
+	Private $id;
+	function __construct($appID, $appName, $id){
 		$this->appID = $appID;
 		$this->appName = $appName;
+		$this->id = $id;
+
+	}
+	function getId(){
+		return $this->id;
 	}
 
 	function getAppID(){

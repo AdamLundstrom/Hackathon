@@ -7,12 +7,14 @@ $uri =  "https://api-v3.igdb.com/games";
 $key = '25adf5f6b515bd32214172f04eaeeb67';
 
 
-#$db = new db_connection;
+$db = new db_connection;
 
 #$db -> dropDatabase();
 
-$array = ReadMostPopular($uri, $key, $db);
+#$array = ReadMostPopular($uri, $key, $db);
 
+
+#$db = new db_connection;
 
 function ReadMostPopular($uri, $key, $db){
 	$response = \Httpful\Request::post($uri) 

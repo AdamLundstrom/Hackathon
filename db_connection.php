@@ -43,8 +43,8 @@ class db_connection{
 		} 
 
 		$sql = "CREATE TABLE IF NOT EXISTS ForumThread(
-			gameID int PRIMARY KEY,
-			threadName varchar(30) NOT NULL,
+			gameID DOUBLE PRIMARY KEY,
+			threadName varchar(250) NOT NULL,
 			UNIQUE (gameID),
 			UNIQUE (threadName)
 			)";	

@@ -73,6 +73,7 @@ session_start();
 						}
 
 					?>
+					
 				
 				</div>
 				 <div class="col-md-6" style="font-family:'Bad Script', cursive;font-size:20px;font-weight:bold;font-style:normal;color:#22282d;border-style: dotted;">
@@ -111,6 +112,8 @@ session_start();
 							
 						}
 					?>
+					<input type="text" placeholder="Skriv inlägg" value="" name ="publish" style = "font-family:'Bad Script', cursive;font-size:26px;font-weight:bold;font-style:normal;color:#22282d; width:100%"/>
+                    <input type="submit" value="Spara inlägg" name="submit" onclick="">
 				
 				</div>
             </div>

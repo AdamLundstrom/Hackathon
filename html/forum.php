@@ -63,7 +63,8 @@ session_start();
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" style="font-family:'Bad Script', cursive;font-size:20px;font-weight:bold;font-style:normal;color:#22282d;border-style: dotted;">
+					<h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Trådar </h1>
 					<?php
 						$threds = $connect->getAllForumThread();
 						for($i = 0; $i < count($threds); $i++){
@@ -72,10 +73,10 @@ session_start();
 						}
 
 					?>
-					<a href = "javascript:void(0)" onclick="showMessage('msg');"> hej</a>
 				
 				</div>
-				 <div class="col-md-6">
+				 <div class="col-md-6" style="font-family:'Bad Script', cursive;font-size:20px;font-weight:bold;font-style:normal;color:#22282d;border-style: dotted;">
+					<h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Diskussion </h1>
 					<?php
 					#error_reporting(0);
 						if(isset($_SESSION['forum'])){

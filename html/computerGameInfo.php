@@ -1,5 +1,6 @@
 <?php
     include_once('../APIWictor.php');
+	include_once('../db_connection.php');
 	//session_start();
  ?>
 <!DOCTYPE html>
@@ -62,6 +63,7 @@
             <div class="row">
                <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;"> 
                     <?php
+						$connect = new db_connection();
 						$threds = $connect->getAllForumThread();
 
                         $compname = $_GET['name']; 

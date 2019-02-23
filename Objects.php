@@ -42,32 +42,35 @@ class Post{
 	private $postText;
 	private $gameId;
 
-	function __construct($postID,$gameId, $userID, $posted, $title, $postText){
-		$this->$postID = $postID;
-		$this->$userID = $userID;
-		$this->$posted = $posted;
+	function __construct($title, $postText){
+		#$this->$postID = $postID;
+		#$this->$userID = $userID;
+		#$this->$posted = $posted;
 		$this->$title = $title;
 		$this->$postText = $postText;
-		$this->$gameId = $gameId;
+		#$this->$gameId = $gameId;
 	}
+/*	
 	function getPostID(){
 		return $this->postID;
 	}
+	function getGameID(){
+		return $this->gameId;
+	}		
 	function getUserID(){
 		return $this->userID;
 	}
 	function getPosted(){
 		return $this->posted;
 	}
+	*/
 	function getTitle(){
 		return $this->title;
 	}
 	function getPostText(){
 		return $this->postText;
 	}
-	function getGameID(){
-		return $this->gameId;
-	}	
+
 }
 
 class Thread{

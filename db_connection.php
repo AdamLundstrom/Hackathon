@@ -60,7 +60,7 @@ class db_connection{
 			FOREIGN KEY (gameID) REFERENCES ForumThread(gameID),
 			userID int NOT NULL,
 			FOREIGN KEY (userID) REFERENCES User(userID),
-			posted DATETIME NOT NULL,
+			posted DATE NOT NULL,
 			title varchar(50) NOT NULL,
 			postText varchar(250) NOT NULL	
 			)";
@@ -111,7 +111,7 @@ class db_connection{
 	}
 
 	function addForumPost($gameID, $userID, $title, $postText){
-		$posted = date("Y-m-d H:i:s");
+		$posted = date("Y-m-d");
 		$sql = "INSERT INTO ForumPost (gameID, userID, posted, title, postText)
 		Values ('$gameID', '$userID', '$posted', '$title', '$postText')";
 
@@ -123,22 +123,38 @@ class db_connection{
 	function getAllForumPost(){
 		$sql="SELECT * FROM ForumPost";
 		$result=$this->connection->query($sql);
-		$postList = array();
+		$postList = null;
+		//var_dump($result);
+		
 		if($result->num_rows > 0){	
 			while($row=$result->fetch_assoc()){	
+	
 				$postList[] = new Post($row["forumPostID"], $row['gameID'], $row['userID'],$row["posted"],$row["title"],$row["postText"]);
-			}	
+			}		
+			//var_dump($postList);
 		}
 		return $postList;
 	}
 
 	function getPostsByThread($gameid){
-		$sql="SELECT * FROM ForumPost WHERE gameID='$gameid'";
+		$sql="SELECT postText FROM ForumPost WHERE gameID='$gameid'";
 		$result=$this->connection->query($sql);
-		$postList = array();
+		$postList = null;
 		if($result->num_rows > 0){	
 			while($row=$result->fetch_assoc()){	
-				$postList[] = new Post($row["forumPostID"], $row['gameID'], $row['userID'],$row["posted"],$row["title"],$row["postText"]);
+				$postList[] = $row["postText"];
+			}	
+		}
+		return $postList;		
+	}
+	
+	function getPostsByThread2($gameid){
+		$sql="SELECT title FROM ForumPost WHERE gameID='$gameid'";
+		$result=$this->connection->query($sql);
+		$postList = null;
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$postList[] = $row["title"];
 			}	
 		}
 		return $postList;		
@@ -215,16 +231,17 @@ class db_connection{
 
 $db = new db_connection;
 
+#$db->dropDatabase();
 /*
 $db->addUser("Alice", "AAAAA", "email@email");
 $db->addUser("Bob", "BBBBB", "email@email");
 $db->addUser("Code", "CCCCC", "email@email");
-*/
 
-#$db->addForumThread(44, "DOOOOOM");
-#$db->addForumThread(2, "Tetris");
 
-/*
+$db->addForumThread(44, "DOOOOOM");
+$db->addForumThread(2, "Tetris");
+
+
 $db->addForumPost(44, 1, "Title1", "Textttttttttttttttt");
 $db->addForumPost(44, 1, "Title2", "Text");
 $db->addForumPost(44, 2, "Title3", "Text");
@@ -242,7 +259,8 @@ $db->addForumPost(44, 2, "Title4", "Textttttttttttttttt");
 
 #$posts['']->getPostText();
 
-#$db->dropDatabase();
 
+#var_dump($db->getPostsByThread(44));
+#var_dump($db->getPostsByThread2(44));
 
 ?>

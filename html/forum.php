@@ -77,13 +77,19 @@ session_start();
 				 <div class="col-md-6">
 					<?php
 						if(isset($_SESSION['forum'])){
-							$forumThreads2 = $connect->getAllForumPost();
-							var_dump($forumThreads2);
-							$forumThreads = $connect->getPostsByThread($threds[$_SESSION['forum']]->getGameID());	
-							
-							for($i = 0; $i < count($forumThreads); $i++){
-								echo var_dump($forumThreads[$i]->getTitle());
-								echo $forumThreads[$i]->getTitle()." ".$forumThreads[$i]->getPosted()."<br>".$forumThreads[$i]->getPostText()."<br><br>";
+							#$forumThreads2 = $connect->getAllForumPost();
+							#var_dump($forumThreads2);
+							$ptext = $connect->getPostsByThread($_SESSION['forum']);
+							$ptitle = $connect->getPostsByThread2($_SESSION['forum']);
+							#$forumThreads = $connect->getPostsByThread($threds[$_SESSION['forum']]->getGameID());	
+							//var_dump($forumThreads[0]);
+							for($i = 0; $i < count($ptext); $i++){
+								echo $ptitle[$i];
+								echo "<br>";
+								echo $ptext[$i];
+								echo "<br><br>";
+								//echo var_dump($forumThreads[$i]->getTitle());
+								//echo $forumThreads[$i]->getTitle()." ".$forumThreads[$i]->getPosted()."<br>".$forumThreads[$i]->getPostText()."<br><br>";
 							}
 							session_unset();
 

@@ -44,11 +44,11 @@ function ReadMostPopular($uri, $key, $db){
 	$nameArray = array();
 	foreach($json as $name){
 		$nameArray[] = $name["name"];
-		if($name["id"] == "90099"){
+		/*if($name["id"] == "90099"){
 			$db -> addForumThread($name["id"], "Tom Clancy''s The Division 2");
 		} else{
 			$db->addForumThread($name["id"], $name["name"]);
-		}
+		}*/
 		#echo $name["id"];
 		#echo $name["name"];
 		#echo "<br/>";

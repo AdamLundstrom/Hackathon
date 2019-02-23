@@ -48,10 +48,27 @@ $searchWord = "Kingdom Hearts III";
 function SearchGame($uri, $key, $searchWord){
 	$response = \Httpful\Request::post($uri) 
 	->addHeader('user-key', $key)
-	->body('limit 10; fields name; search "'.$searchWord. ' ";')
+	->body('limit 1; fields *; search "'.$searchWord. ' ";')
 	->send();
 
 	return $response;
+}
+
+#echo GetInforByName($uri, $key, $searchWord);
+
+function GetInforByName($uri, $key, $searchWord){
+	$response = \Httpful\Request::post($uri) 
+	->addHeader('user-key', $key)
+	->body('limit 1; fields summary; search "'.$searchWord. ' ";')
+	->send();
+
+	$json = json_decode($response, true);
+	#$sumArray = array();
+	foreach($json as $name){
+		$summary = $name["summary"];
+	}
+
+	return $summary;
 }
 
 $genre = 4;

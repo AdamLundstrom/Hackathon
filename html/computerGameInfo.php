@@ -1,8 +1,6 @@
-<?php 
-include('../APIWictor.php');
-include_once('../db_connection.php');
-?>
-
+<?php
+    include_once('../APIWictor.php');
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -61,33 +59,15 @@ include_once('../db_connection.php');
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6" style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;border-style: dotted;">
-                    <h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Topplista spel </h1>
-                    <?php 
-                        $array = ReadMostPopular($uri, $key, $db);
-                        $linkAddress = "ComputerGameInfo.php";
-                        $counter = 1;
-                        foreach ($array as $value) {
-                            echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
-                            echo "<br/>";
-                            $counter++;
-                        }
-                    ?>
-                </div>
-                <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d; border-style: dotted;">
-                    <h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Topplista appar </h1>
+               <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;"> 
                     <?php
-                        $array = $db->getAllAppNames();
-                        $linkAddress = "ComputerGameInfo.php";
-                        $counter = 1;
-                        foreach ($array as $value) {
-                            echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
-                            echo "<br/>";
-                            $counter++;
-                        }
+                        $compname = $_GET['name']; 
+                        echo "<h1 style= 'font-family:'Bad Script', cursive;font-weight:bold;'> ".$compname." </h1>";
+                        echo GetInforByName($uri, $key, $compname);
+                        #echo $compname;
                     ?>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>

@@ -1,17 +1,6 @@
 <?php 
 include('../APIWictor.php');
 include_once('../db_connection.php');
-if(isset($_POST["submit"])){
-        search();
-        #$_SESSION['var'] = $_POST["search"];
-        #header('http://localhost/foundSearches.php');
-    }
-
-    function search(){
-        echo "heeeelooo";
-        header('http://localhost/foundSearches.php');
-    }
-     
 
 ?>
 
@@ -68,8 +57,8 @@ if(isset($_POST["submit"])){
             <div class="row">
                 <div class="col-md-12"></div>
                     
-                    <form action="index.php" target="_blank" method="POST">
-                        <input type="text" placeholder="Sök efter spel" value="search" name ="search" style = "font-family:'Bad Script', cursive;font-size:26px;font-weight:bold;font-style:normal;color:#22282d; width:100%"/>
+                    <form action="../APIWictor.php" method="POST">
+                        <input id = "search" type="text" placeholder="Sök efter spel" value="search" name ="search" style = "font-family:'Bad Script', cursive;font-size:26px;font-weight:bold;font-style:normal;color:#22282d; width:100%"/>
                         <input type="submit" value="Submit" name="submit" onclick="">
                     </form>
                  

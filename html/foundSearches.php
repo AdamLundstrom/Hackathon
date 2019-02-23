@@ -1,8 +1,6 @@
 <?php
     include_once('../APIWictor.php');
-    session_start();
-    $varval = $_SESSION['var']
-    echo $varval;
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -64,13 +62,17 @@
             <div class="row">
                <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;"> 
                     <?php
+						//var_dump($_SESSION["search"]);	
+						//var_dump($_SESSION["search"]);
+						$linkAddress = "ComputerGameInfo.php";
                         if(!isset($_SESSION["search"]))
                             echo "inga träffar";
                         else{
                             foreach ($_SESSION["search"] as $value) {
-                                echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
+								//var_dump($value); 
+								echo "<a href='".$linkAddress."?name=",$value["name"],"'> ".$value["name"]."</a>";
                                 echo "<br/>";
-                                $counter++;
+                                
                             }
                             session_unset();
                             session_destroy();

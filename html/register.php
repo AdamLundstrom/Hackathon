@@ -1,3 +1,11 @@
+<?php
+    include_once '../db_connection.php';
+    if(isset($_POST["submit"])){
+        $db->addUser($_POST["username"], $_POST["password"], $_POST["email"]);
+        header("Location:http://localhost/Good_tech_hack_2019/html/login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -39,13 +47,12 @@
     <div class="register-photo">
         <div class="form-container">
             <div class="image-holder" style="background-image:url(&quot;assets/img/dosain.png&quot;);width:493px;background-size:contain;"></div>
-            <form method="post" style="width:485px;">
+            <form action="register.php" method="post" style="width:485px;">
                 <h2 class="text-center" style="font-family:'Bad Script', cursive;"><strong>Skapa</strong> ett konto.</h2>
-                <div class="form-group"><input class="form-control" type="email" name="username" required="" placeholder="Användarnamn" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
-                <div class="form-group"><input class="form-control" type="password" name="email" required="" placeholder="Mejladress" maxlength="30" minlength="1" inputmode="email" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
-                <div
-                    class="form-group"><input class="form-control" type="password" name="password" required="" placeholder="Lösenord" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="font-family:'Bad Script', cursive;background-color:#354c6f;font-size:19px;font-weight:bold;">Registrera </button></div><a href="login.html" class="already" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Har du redan ett konto? Logga in här.</a></form>
+                <div class="form-group"><input class="form-control" type="text" name="username" required="" placeholder="Användarnamn" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
+                <div class="form-group"><input class="form-control" type="email" name="email" required="" placeholder="Mejladress" maxlength="30" minlength="1" inputmode="email" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
+                <div class="form-group"><input class="form-control" type="password" name="password" required="" placeholder="Lösenord" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
+        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="submit" style="font-family:'Bad Script', cursive;background-color:#354c6f;font-size:19px;font-weight:bold;" >Registrera </button></div><a href="login.php" class="already" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Har du redan ett konto? Logga in här.</a></form>
     </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>

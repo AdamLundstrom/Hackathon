@@ -1,20 +1,9 @@
-<?php 
-include('../APIWictor.php');
-include_once('../db_connection.php');
-if(isset($_POST["submit"])){
-        search();
-        #$_SESSION['var'] = $_POST["search"];
-        #header('http://localhost/foundSearches.php');
-    }
-
-    function search(){
-        echo "heeeelooo";
-        header('http://localhost/foundSearches.php');
-    }
-     
-
-?>
-
+<?php
+    include_once('../APIWictor.php');
+    session_start();
+    $varval = $_SESSION['var']
+    echo $varval;
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -67,52 +56,33 @@ if(isset($_POST["submit"])){
         <div class="container">
             <div class="row">
                 <div class="col-md-12"></div>
-                    
-                    <form action="index.php" target="_blank" method="POST">
-                        <input type="text" placeholder="Sök efter spel" value="search" name ="search" style = "font-family:'Bad Script', cursive;font-size:26px;font-weight:bold;font-style:normal;color:#22282d; width:100%"/>
-                        <input type="submit" value="Submit" name="submit" onclick="">
-                    </form>
-                 
             </div>
         </div>
     </div>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6" style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;border-style: dotted;">
-                    <h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Topplista spel </h1>
-                    <?php 
-                        $array = ReadMostPopular($uri, $key, $db);
-                        $linkAddress = "ComputerGameInfo.php";
-                        $counter = 1;
-                        foreach ($array as $value) {
-                            echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
-                            echo "<br/>";
-                            $counter++;
-                        }
-                    ?>
-                </div>
-                <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d; border-style: dotted;">
-                    <h1 style= "font-family:'Bad Script', cursive;font-weight:bold;"> Topplista appar </h1>
+               <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;"> 
                     <?php
-                        $array = $db->getAllAppNames();
-                        $linkAddress = "ComputerGameInfo.php";
-                        $counter = 1;
-                        foreach ($array as $value) {
-                            echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
-                            echo "<br/>";
-                            $counter++;
+                        if(!isset($_SESSION["search"]))
+                            echo "inga träffar";
+                        else{
+                            foreach ($_SESSION["search"] as $value) {
+                                echo $counter, ". ", "<a href='".$linkAddress."?name=",$value,"'> ".$value."</a>";
+                                echo "<br/>";
+                                $counter++;
+                            }
+                            session_unset();
+                            session_destroy();
                         }
                     ?>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
 </body>
-
-
 
 </html>

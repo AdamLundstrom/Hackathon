@@ -1,3 +1,22 @@
+<?php
+    include_once '../db_connection.php';
+    session_start();
+    $_SESSION["loggedin"] = FALSE;
+    if(isset($_POST["submit"])){
+        #$db->addUser($_POST["username"], $_POST["password"], $_POST["email"]);
+        
+        $user = $db->getUser("Alice");
+        echo $user->getUserName();
+        if($_POST["email"] == $user->getEmail() && $_POST["password"] == $user->getuserPassword("AA")) {
+            $_SESSION["loggedin"] = TRUE;
+            echo "Seger";
+            #skicka vidare
+        }
+        echo $_POST["email"];
+        echo $_POST["password"];
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -37,12 +56,12 @@
         </div>
     </nav>
     <div class="login-clean">
-        <form method="post">
+        <form action "login.php" method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-contact-outline" style="color:#354c6f;font-size:130px;"></i></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Mejladress" style="font-family:'Bad Script', cursive;font-weight:bold;color:rgb(34,40,45);font-size:18px;"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Lösenord" style="font-family:'Bad Script', cursive;color:#22282d;font-weight:bold;font-size:18px;"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#354c6f;font-family:'Bad Script', cursive;font-weight:bold;font-size:18px;">Logga in</button></div><a href="#" class="forgot" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Gllömt lösenord?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="submit" style="background-color:#354c6f;font-family:'Bad Script', cursive;font-weight:bold;font-size:18px;">Logga in</button></div><a href="#" class="forgot" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Gllömt lösenord?</a></form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

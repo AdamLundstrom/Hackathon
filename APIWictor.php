@@ -6,6 +6,8 @@ include('db_connection.php');
 $uri =  "https://api-v3.igdb.com/games";
 $key = '25adf5f6b515bd32214172f04eaeeb67';
 
+session_start();
+
 
 $db = new db_connection;
 
@@ -15,6 +17,13 @@ $db = new db_connection;
 
 
 #$db = new db_connection;
+
+if(isset($_POST["search"])){
+	$found = SearchGame($uri, $key, $_POST["search"]);
+	if($found == null);
+	else
+		$_SESSION["search"]= $found;
+}
 
 function ReadMostPopular($uri, $key, $db){
 	$response = \Httpful\Request::post($uri) 
@@ -48,7 +57,7 @@ $searchWord = "Kingdom Hearts III";
 function SearchGame($uri, $key, $searchWord){
 	$response = \Httpful\Request::post($uri) 
 	->addHeader('user-key', $key)
-	->body('limit 1; fields *; search "'.$searchWord. ' ";')
+	->body('limit 50; fields *; search "'.$searchWord. ' ";')
 	->send();
 
 	return $response;

@@ -41,7 +41,7 @@ class Post{
 	private $title;
 	private $postText;
 	private $gameId;
-
+$row["forumPostID"], $row['gameID'], $row['userID'],$row["posted"],$row["title"],$row["postText"]
 	function __construct($title, $postText){
 		#$this->$postID = $postID;
 		#$this->$userID = $userID;

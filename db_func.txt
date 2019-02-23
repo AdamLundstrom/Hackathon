@@ -41,6 +41,10 @@ getAllForumPost()
 Example:
 $posts = $db->getAllForumPost();
 
+get posts by thread
+Syntax:
+getPostsByThread($gameid)
+
 Adams app grejer
 Syntax:
 addApp($appID, $appName)

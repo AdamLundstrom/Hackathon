@@ -132,6 +132,18 @@ class db_connection{
 		return $postList;
 	}
 
+	function getPostsByThread($gameid){
+		$sql="SELECT * FROM ForumPost WHERE gameID='$gameid'";
+		$result=$this->connection->query($sql);
+		$postList = array();
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$postList[] = new Post($row["forumPostID"], $row['gameID'], $row['userID'],$row["posted"],$row["title"],$row["postText"]);
+			}	
+		}
+		return $postList;		
+	}
+
 	function addForumThread($gameID, $threadName){
 		$sql = "INSERT INTO ForumThread (gameID, threadName)
 		Values ('$gameID', '$threadName')";

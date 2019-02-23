@@ -42,20 +42,26 @@ function ReadMostPopular($uri, $key, $db){
 	$json = json_decode($response, true);
 
 	$nameArray = array();
+	
 	foreach($json as $name){
+		
 		$nameArray[] = $name["name"];
+		/*
 		if($name["id"] == "90099"){
 			$db -> addForumThread($name["id"], "Tom Clancy''s The Division 2");
 		} else{
 			$db->addForumThread($name["id"], $name["name"]);
 		}
+		*/
 		#echo $name["id"];
 		#echo $name["name"];
 		#echo "<br/>";
 	}
 
 	return $nameArray;
+	
 	#return $response;
+	
 }
 
 $searchWord = "Kingdom Hearts III";

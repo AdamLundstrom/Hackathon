@@ -1,5 +1,6 @@
 <?php
     include_once('../APIWictor.php');
+	//session_start();
  ?>
 <!DOCTYPE html>
 <html>
@@ -64,6 +65,9 @@
                         $compname = $_GET['name']; 
                         echo "<h1 style= 'font-family:'Bad Script', cursive;font-weight:bold;'> ".$compname." </h1>";
                         echo GetInforByName($uri, $key, $compname);
+						//for()
+						//$_SESSION['forum'] = 
+						echo "<br><a href = forum.php>Gå till forum</a>";
                         #echo $compname;
                     ?>
                 </div>

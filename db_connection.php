@@ -186,6 +186,19 @@ class db_connection{
 		return $appList;
 	}
 
+	function getAppByName($appName){
+		$sql = "SELECT appID FROM App WHERE appName ='$appName'";
+		$result=$this->connection->query($sql);
+		$appList ="";
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$appList[] = $row["appID"];
+			}	
+		}
+		return $appList;
+
+	}
+
 	function getAllAppNames(){
 		$sql="SELECT appName FROM App LIMIT 0, 10";
 		$result=$this->connection->query($sql);

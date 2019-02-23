@@ -2,7 +2,8 @@
     include_once '../db_connection.php';
     if(isset($_POST["submit"])){
         $db->addUser($_POST["username"], $_POST["password"], $_POST["email"]);
-        header("Location:http://localhost/Good_tech_hack_2019/html/login.php");
+        #header("Location:/login.php");
+        
     }
 ?>
 

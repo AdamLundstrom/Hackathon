@@ -62,11 +62,19 @@
             <div class="row">
                <div class="col-md-6"style="font-family:'Bad Script', cursive;font-size:16px;font-weight:bold;font-style:normal;color:#22282d;"> 
                     <?php
+						$threds = $connect->getAllForumThread();
+
                         $compname = $_GET['name']; 
                         echo "<h1 style= 'font-family:'Bad Script', cursive;font-weight:bold;'> ".$compname." </h1>";
                         echo GetInforByName($uri, $key, $compname);
-						//for()
+						for($i = 0; $i < count($threds); $i++){
+							if($threds[$i]->getThreadName() == $compname){
+									$_SESSION['forum'] = $i;
+							}	
+						}	
+							//for()
 						//$_SESSION['forum'] = 
+					
 						echo "<br><a href = forum.php>Gå till forum</a>";
                         #echo $compname;
                     ?>

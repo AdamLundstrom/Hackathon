@@ -10,8 +10,8 @@ $inputPassword="";
 if(isset($_POST['forumThread'])){
 	for($i = 0; $i < count($threds); $i++){
 		if($i == $_POST['forumThread']){
-			echo var_dump($threds[$i]->getGameID());
-			//$_SESSION['forum'] = $threds[$i]->getAllForumPost();
+			
+			$_SESSION['forum'] = $i;
 			echo true;
 		}	
 	}

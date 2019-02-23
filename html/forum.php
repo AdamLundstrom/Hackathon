@@ -10,7 +10,6 @@ $(document).ready(function(){
 function showMessage(msg){
 	var value = "hej";
 	$.post('forumThread.php',{'forumThread':value}, function (data) {
-		alert(data);
 		location.reload();
 	});	
 
@@ -63,7 +62,7 @@ session_start();
     <div>
         <div class="container">
             <div class="row">
-                <div id = "threadLink" class="col-md-12" style="width:30%;height:370px;">
+                <div class="col-md-6">
 					<?php
 						$threds = $connect->getAllForumThread();
 						for($i = 0; $i < count($threds); $i++){
@@ -75,12 +74,17 @@ session_start();
 					<a href = "javascript:void(0)" onclick="showMessage('msg');"> hej</a>
 				
 				</div>
-				 <div class="col-md-12" style="width:70%px;height:370px;">
+				 <div class="col-md-6">
 					<?php
 						if(isset($_SESSION['forum'])){
+							$forumThreads2 = $connect->getAllForumPost();
+							var_dump($forumThreads2);
+							$forumThreads = $connect->getPostsByThread($threds[$_SESSION['forum']]->getGameID());	
 							
-							echo(var_dump($_SESSION['forum']));
-							
+							for($i = 0; $i < count($forumThreads); $i++){
+								echo var_dump($forumThreads[$i]->getTitle());
+								echo $forumThreads[$i]->getTitle()." ".$forumThreads[$i]->getPosted()."<br>".$forumThreads[$i]->getPostText()."<br><br>";
+							}
 							session_unset();
 
 							// destroy the session

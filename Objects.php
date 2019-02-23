@@ -40,13 +40,15 @@ class Post{
 	private $posted;
 	private $title;
 	private $postText;
+	private $gameId;
 
-	function __construct($postID, $userID, $posted, $title, $postText){
+	function __construct($postID,$gameId, $userID, $posted, $title, $postText){
 		$this->$postID = $postID;
 		$this->$userID = $userID;
 		$this->$posted = $posted;
 		$this->$title = $title;
 		$this->$postText = $postText;
+		$this->$gameId = $gameId;
 	}
 	function getPostID(){
 		return $this->postID;
@@ -63,6 +65,9 @@ class Post{
 	function getPostText(){
 		return $this->postText;
 	}
+	function getGameID(){
+		return $this->gameId;
+	}	
 }
 
 class Thread{

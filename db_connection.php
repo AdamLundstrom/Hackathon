@@ -271,15 +271,12 @@ $db->addUser("Alice", "AAAAA", "email@email");
 $db->addUser("Bob", "BBBBB", "email@email");
 $db->addUser("Code", "CCCCC", "email@email");
 
-
-$db->addForumThread(44, "DOOOOOM");
-$db->addForumThread(2, "Tetris");
-
-
-$db->addForumPost(44, 1, "Title1", "Textttttttttttttttt");
-$db->addForumPost(44, 1, "Title2", "Text");
-$db->addForumPost(44, 2, "Title3", "Text");
-$db->addForumPost(44, 2, "Title4", "Textttttttttttttttt");
+$db->addForumPost(2933, 1, "Kindom Hearts III", "Great game with many recognisable characters");
+$db->addForumPost(2933, 2, "KH III", "Kid friendly");
+$db->addForumPost(2933, 1, "Title3", "Text");
+$db->addForumPost(19686, 2, "Title4", "AAAAAAAAAAA");
+$db->addForumPost(19686, 2, "Title5", "BBBBBBB");
+$db->addForumPost(19686, 2, "Title6", "CCCCCCCCCCC");
 */
 
 #$user = $db->getUser("Bob");

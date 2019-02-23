@@ -2,8 +2,6 @@
     include_once '../db_connection.php';
     if(isset($_POST["submit"])){
         $db->addUser($_POST["username"], $_POST["password"], $_POST["email"]);
-        #header("Location:/login.php");
-        
     }
 ?>
 
@@ -53,7 +51,8 @@
                 <div class="form-group"><input class="form-control" type="text" name="username" required="" placeholder="Användarnamn" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
                 <div class="form-group"><input class="form-control" type="email" name="email" required="" placeholder="Mejladress" maxlength="30" minlength="1" inputmode="email" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
                 <div class="form-group"><input class="form-control" type="password" name="password" required="" placeholder="Lösenord" maxlength="30" minlength="1" style="font-family:'Bad Script', cursive;color:#22282d;font-size:18px;font-weight:bold;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="submit" style="font-family:'Bad Script', cursive;background-color:#354c6f;font-size:19px;font-weight:bold;" >Registrera </button></div><a href="login.php" class="already" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Har du redan ett konto? Logga in här.</a></form>
+        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="submit" style="font-family:'Bad Script', cursive;background-color:#354c6f;font-size:19px;font-weight:bold;" >Registrera </button></div>
+        <a href="login.php" class="already" style="font-family:'Bad Script', cursive;font-weight:bold;font-size:14px;">Har du redan ett konto? Logga in här.</a></form>
     </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>

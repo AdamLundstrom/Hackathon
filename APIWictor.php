@@ -46,13 +46,13 @@ function ReadMostPopular($uri, $key, $db){
 	foreach($json as $name){
 		
 		$nameArray[] = $name["name"];
-<<<<<<< HEAD
+
 		/*if($name["id"] == "90099"){
 			$db -> addForumThread($name["id"], "Tom Clancy''s The Division 2");
 		} else{
 			$db->addForumThread($name["id"], $name["name"]);
 		}*/
-=======
+
 		/*
 		if($name["id"] == "90099"){
 			$db -> addForumThread($name["id"], "Tom Clancy''s The Division 2");
@@ -60,7 +60,7 @@ function ReadMostPopular($uri, $key, $db){
 			$db->addForumThread($name["id"], $name["name"]);
 		}
 		*/
->>>>>>> 189fbf9b1a7b0bb5a2c94f4823ef0138e2b7d30d
+
 		#echo $name["id"];
 		#echo $name["name"];
 		#echo "<br/>";

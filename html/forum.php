@@ -1,8 +1,26 @@
 <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+
+
+});	
+
+function showMessage(msg){
+	var value = "hej";
+	$.post('forumThread.php',{'forumThread':value}, function (data) {
+		alert(data);
+		location.reload();
+	});	
+
+};	
+</script>
 <?php
 include ('../db_connection.php');
 $connect = new db_connection();
-
+//ob_start();
+session_start();
 
 ?>
 <html>
@@ -45,13 +63,29 @@ $connect = new db_connection();
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div id = "threadLink" class="col-md-12" style="width:30%;height:370px;">
 					<?php
-						$threds[] = $connect->getAllForumThread();
-						echo (var_dump($threds[0][1]));
+						$threds = $connect->getAllForumThread();
 						for($i = 0; $i < count($threds); $i++){
-								
-								echo $threds[$i]->getThreadName();
+
+							echo "<a href='javascript:void(0)' onclick='showMessage($i); '>".$threds[$i]->getThreadName()."</a><br>";
+						}
+
+					?>
+					<a href = "javascript:void(0)" onclick="showMessage('msg');"> hej</a>
+				
+				</div>
+				 <div class="col-md-12" style="width:70%px;height:370px;">
+					<?php
+						if(isset($_SESSION['forum'])){
+							
+							echo(var_dump($_SESSION['forum']));
+							
+							session_unset();
+
+							// destroy the session
+							session_destroy(); 
+							
 						}
 					?>
 				

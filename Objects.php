@@ -75,7 +75,7 @@ class Thread{
 	}
 
 	function getGameID(){
-		return $this->gameID;
+		return $this->gameid;
 	}
 
 	function getThreadName(){

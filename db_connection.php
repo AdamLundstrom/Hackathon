@@ -278,6 +278,9 @@ $db->addForumPost(19686, 2, "Title4", "AAAAAAAAAAA");
 $db->addForumPost(19686, 2, "Title5", "BBBBBBB");
 $db->addForumPost(19686, 2, "Title6", "CCCCCCCCCCC");
 */
+#$db->addForumPost(36950, 1, "Anthem", "Adinator aktiverad");
+#$db->addForumPost(36950, 2, "Ant", "Kid friendly - Maybe");
+
 
 #$user = $db->getUser("Bob");
 #echo $user->getUserName();

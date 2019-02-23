@@ -19,10 +19,18 @@ $db = new db_connection;
 #$db = new db_connection;
 
 if(isset($_POST["search"])){
+	echo ("härrr");
 	$found = SearchGame($uri, $key, $_POST["search"]);
-	if($found == null);
+
+	if($found == null){
+			echo "nothibgM";
+	}	
 	else
 		$_SESSION["search"]= $found;
+		echo "found";
+	
+	header('Location: http://localhost/Hackathon2/html/foundSearches.php');
+	exit();
 }
 
 function ReadMostPopular($uri, $key, $db){
@@ -36,11 +44,11 @@ function ReadMostPopular($uri, $key, $db){
 	$nameArray = array();
 	foreach($json as $name){
 		$nameArray[] = $name["name"];
-		/*if($name["id"] == "90099"){
+		if($name["id"] == "90099"){
 			$db -> addForumThread($name["id"], "Tom Clancy''s The Division 2");
 		} else{
 			$db->addForumThread($name["id"], $name["name"]);
-		}*/
+		}
 		#echo $name["id"];
 		#echo $name["name"];
 		#echo "<br/>";
@@ -59,8 +67,8 @@ function SearchGame($uri, $key, $searchWord){
 	->addHeader('user-key', $key)
 	->body('limit 50; fields *; search "'.$searchWord. ' ";')
 	->send();
-
-	return $response;
+	$json = json_decode($response, true);
+	return $json;
 }
 
 #echo GetInforByName($uri, $key, $searchWord);

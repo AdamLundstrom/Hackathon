@@ -7,8 +7,8 @@ $(document).ready(function(){
 
 });	
 
-function showMessage(msg){
-	var value = "hej";
+function showMessage(value){
+	//alert("hej");
 	$.post('forumThread.php',{'forumThread':value}, function (data) {
 		location.reload();
 	});	
@@ -20,6 +20,7 @@ include ('../db_connection.php');
 $connect = new db_connection();
 //ob_start();
 session_start();
+
 
 ?>
 <html>
@@ -76,20 +77,31 @@ session_start();
 				</div>
 				 <div class="col-md-6">
 					<?php
+					#error_reporting(0);
 						if(isset($_SESSION['forum'])){
 							#$forumThreads2 = $connect->getAllForumPost();
 							#var_dump($forumThreads2);
-							$ptext = $connect->getPostsByThread($_SESSION['forum']);
-							$ptitle = $connect->getPostsByThread2($_SESSION['forum']);
+							$ptext = $connect->getPostsByThread($threds[$_SESSION['forum']]->getGameID());
+							//var_dump($ptext);
+							$ptitle = $connect->getPostsByThread2($threds[$_SESSION['forum']]->getGameID());
+							$posted = $connect->getPostsByThread3($threds[$_SESSION['forum']]->getGameID());
+							$userId = $connect->getPostsByThread4($threds[$_SESSION['forum']]->getGameID());
 							#$forumThreads = $connect->getPostsByThread($threds[$_SESSION['forum']]->getGameID());	
 							//var_dump($forumThreads[0]);
-							for($i = 0; $i < count($ptext); $i++){
-								echo $ptitle[$i];
-								echo "<br>";
-								echo $ptext[$i];
-								echo "<br><br>";
-								//echo var_dump($forumThreads[$i]->getTitle());
-								//echo $forumThreads[$i]->getTitle()." ".$forumThreads[$i]->getPosted()."<br>".$forumThreads[$i]->getPostText()."<br><br>";
+							if(!count($ptext) == NULL){
+								for($i = 0; $i < count($ptext); $i++){
+									$userName = $connect->getUserByID($userId[$i]);
+									echo $ptitle[$i];
+									echo "     ";
+									echo $posted[$i];
+									echo "     ";
+									echo $userName;
+									echo "<br>";
+									echo $ptext[$i];
+									echo "<br><br>";
+									//echo var_dump($forumThreads[$i]->getTitle());
+									//echo $forumThreads[$i]->getTitle()." ".$forumThreads[$i]->getPosted()."<br>".$forumThreads[$i]->getPostText()."<br><br>";
+								}
 							}
 							session_unset();
 

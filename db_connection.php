@@ -60,7 +60,7 @@ class db_connection{
 			FOREIGN KEY (gameID) REFERENCES ForumThread(gameID),
 			userID int NOT NULL,
 			FOREIGN KEY (userID) REFERENCES User(userID),
-			posted DATE NOT NULL,
+			posted DATETIME NOT NULL,
 			title varchar(50) NOT NULL,
 			postText varchar(250) NOT NULL	
 			)";
@@ -109,9 +109,19 @@ class db_connection{
 			return $user;	
 		}
 	}
+	
+	function getUserByID($userID){
+		$sql="SELECT userName FROM User WHERE userID='$userID'";
+		$result=$this->connection->query($sql);
+		if($result->num_rows > 0){	
+			$row=$result->fetch_assoc();
+			$userName = $row['userName'];
+			return $userName;	
+		}
+	}
 
 	function addForumPost($gameID, $userID, $title, $postText){
-		$posted = date("Y-m-d");
+		$posted = date("Y-m-d H:i:s");
 		$sql = "INSERT INTO ForumPost (gameID, userID, posted, title, postText)
 		Values ('$gameID', '$userID', '$posted', '$title', '$postText')";
 
@@ -155,6 +165,30 @@ class db_connection{
 		if($result->num_rows > 0){	
 			while($row=$result->fetch_assoc()){	
 				$postList[] = $row["title"];
+			}	
+		}
+		return $postList;		
+	}
+	
+	function getPostsByThread3($gameid){
+		$sql="SELECT posted FROM ForumPost WHERE gameID='$gameid'";
+		$result=$this->connection->query($sql);
+		$postList = null;
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$postList[] = $row["posted"];
+			}	
+		}
+		return $postList;		
+	}
+	
+	function getPostsByThread4($gameid){
+		$sql="SELECT userID FROM ForumPost WHERE gameID='$gameid'";
+		$result=$this->connection->query($sql);
+		$postList = null;
+		if($result->num_rows > 0){	
+			while($row=$result->fetch_assoc()){	
+				$postList[] = $row["userID"];
 			}	
 		}
 		return $postList;		

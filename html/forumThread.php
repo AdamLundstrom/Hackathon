@@ -10,9 +10,9 @@ $inputPassword="";
 if(isset($_POST['forumThread'])){
 	for($i = 0; $i < count($threds); $i++){
 		if($i == $_POST['forumThread']){
-			
+			echo $i;
 			$_SESSION['forum'] = $i;
-			echo true;
+			//echo true;
 		}	
 	}
 }
